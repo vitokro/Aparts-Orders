@@ -1,14 +1,30 @@
-package ua.kiev.prog;
+package ua.kiev.prog.apartments;
 
 
 import java.sql.*;
 import java.util.*;
 
 public class Apartments {
+    static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/weedb?serverTimezone=Europe/Kiev";
+    static final String DB_USER = "root";
+    static final String DB_PASSWORD = "password";
+
     private Connection conn;
+
+
     
     public Apartments(Connection conn) {
         this.conn = conn;
+    }
+
+    public static void main(String[] args) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+            new Apartments(conn).chooseAction();
+        } catch (SQLException throwables) {
+            System.out.println("Connection failed");
+            throwables.printStackTrace();
+        }
     }
 
     public void chooseAction() {
