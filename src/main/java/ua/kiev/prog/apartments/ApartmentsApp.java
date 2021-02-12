@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class ApartmentsApp {
 
-    private Connection conn;
+    private final Connection conn;
     private DAO<Apartment> apartmentDAO;
 
     public ApartmentsApp(Connection conn) {
@@ -28,7 +28,7 @@ public class ApartmentsApp {
                 System.out.println("1: add apartment");
                 System.out.println("2: add random apartments");
                 System.out.println("3: delete apartment");
-                System.out.println("4: change apartment");
+                System.out.println("4: update apartment");
                 System.out.println("5: view apartments");
                 System.out.println("6: select by condition");
                 System.out.print("-> ");
@@ -89,8 +89,7 @@ public class ApartmentsApp {
             System.out.println("Enter integer values!");
             return null;
         }
-        final Apartment ap = new Apartment(district, address, area, roomsNumber, price);
-        return ap;
+        return new Apartment(district, address, area, roomsNumber, price);
     }
 
     private void deleteApartment(Scanner sc) {

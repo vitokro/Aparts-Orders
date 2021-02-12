@@ -2,14 +2,9 @@ package ua.kiev.prog.orders;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
 import ua.kiev.prog.DAO;
-import ua.kiev.prog.orders.DAOs.CustomersDAO;
-import ua.kiev.prog.orders.DAOs.GoodsDAO;
-import ua.kiev.prog.orders.DAOs.OrdersDAO;
-import ua.kiev.prog.orders.DAOs.OrdersViewDAO;
-import ua.kiev.prog.orders.entities.Customers;
-import ua.kiev.prog.orders.entities.Goods;
-import ua.kiev.prog.orders.entities.Orders;
-import ua.kiev.prog.orders.entities.OrdersView;
+import ua.kiev.prog.DbProperties;
+import ua.kiev.prog.orders.DAOs.*;
+import ua.kiev.prog.orders.entities.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -23,11 +18,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class OrdersApp {
-    private Connection conn;
-    private DAO<Customers> customersDAO;
-    private DAO<Goods> goodsDAO;
-    private DAO<Orders> ordersDAO;
-    private DAO<OrdersView> ordersViewDAO;
+    private final Connection conn;
+    private final DAO<Customers> customersDAO;
+    private final DAO<Goods> goodsDAO;
+    private final DAO<Orders> ordersDAO;
+    private final DAO<OrdersView> ordersViewDAO;
 
     public OrdersApp(Connection conn) {
         this.conn = conn;
@@ -88,13 +83,13 @@ public class OrdersApp {
         try {
             ScriptRunner scriptRunner = new ScriptRunner(conn);
             scriptRunner.setLogWriter(new PrintWriter("initDb.log"));
-            scriptRunner.runScript(new FileReader(new File("src/main/java/ua/kiev/prog/orders/sql/InitDB.sql")));
+            scriptRunner.runScript(new FileReader(new File(new DbProperties().getInitSQL())));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void addProduct(Scanner sc) throws SQLException {
+    private void addProduct(Scanner sc) {
         System.out.print("Enter product name: ");
         String product = sc.nextLine();
         System.out.print("Enter price: ");
@@ -133,7 +128,7 @@ public class OrdersApp {
         }
     }
 
-    private void addCustomer(Scanner sc) throws SQLException {
+    private void addCustomer(Scanner sc) {
         System.out.print("Enter customer first name: ");
         String firstName = sc.nextLine();
         System.out.print("Enter customer last name: ");

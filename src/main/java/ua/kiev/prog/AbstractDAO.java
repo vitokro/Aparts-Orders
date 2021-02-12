@@ -154,46 +154,6 @@ public class AbstractDAO<T> implements DAO<T> {
         return res;
     }
 
-//    @Override
-//    public List<T> selectByCriteria(T t) {
-//        List<T> res = new ArrayList<>();
-//
-//        try {
-//            try (Statement st = conn.createStatement()) {
-//                StringJoiner sj = new StringJoiner(", ");
-//                Field[] names = t.getClass().getDeclaredFields();
-//                for (Field f : names) {
-//                    if (f.get(t) != null)
-//                        sj.add(f.getName());
-//                }
-//                String sql = "SELECT * FROM " + table;
-//                try (ResultSet rs = st.executeQuery(sql)) {
-//                    ResultSetMetaData md = rs.getMetaData();
-//
-//                    while (rs.next()) {
-//                        for (int i = 1; i <= md.getColumnCount(); i++) {
-//                            String columnName = md.getColumnName(i);
-//
-//                            Field field = cls.getDeclaredField(columnName);
-//                            field.setAccessible(true);
-//
-//                            field.set(t, rs.getObject(columnName));
-//                        }
-//                        res.add(t);
-//                    }
-//                }
-//            }
-//
-//            return res;
-//        } catch (Exception ex) {
-//            throw new RuntimeException(ex);
-//        }
-//
-//    }
-
-//    public void init(Class<T> cls) {
-//    }
-
     @Override
     public void create() {
         try {

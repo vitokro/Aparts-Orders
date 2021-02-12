@@ -5,9 +5,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DbProperties {
-    private String url;
-    private String user;
-    private String password;
+    private final String url;
+    private final String user;
+    private final String password;
+    private final String initSQL;
 
     public DbProperties() {
         InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties");
@@ -23,6 +24,7 @@ public class DbProperties {
         url = props.getProperty("db.url");
         user = props.getProperty("db.user");
         password = props.getProperty("db.password");
+        initSQL = props.getProperty("db.initSQL");
     }
 
     public String getUrl() {
@@ -35,5 +37,9 @@ public class DbProperties {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getInitSQL() {
+        return initSQL;
     }
 }

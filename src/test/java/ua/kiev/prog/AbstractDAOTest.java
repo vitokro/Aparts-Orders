@@ -7,7 +7,7 @@ import ua.kiev.prog.apartments.ApartmentDAO;
 import java.sql.*;
 import java.util.List;
 
-//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AbstractDAOTest {
     static Connection conn;
     static DAO<Apartment> apartmentDAO;
@@ -38,7 +38,7 @@ class AbstractDAOTest {
     }
 
     @Test
-//    @Order(1)
+    @Order(1)
     void create() {
         try (Statement st = conn.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM Apartment");
@@ -53,7 +53,7 @@ class AbstractDAOTest {
 
 
     @Test
-//    @Order(2)
+    @Order(2)
     void insert() {
         apartmentDAO.insert(ap1);
         final List<Apartment> list = apartmentDAO.getAll();
@@ -62,7 +62,7 @@ class AbstractDAOTest {
     }
 
     @Test
-//    @Order(3)
+    @Order(3)
     void update() {
         ap1.setAddress("new Addr");
         ap1.setArea(999);
@@ -74,7 +74,7 @@ class AbstractDAOTest {
     }
 
     @Test
-//    @Order(4)
+    @Order(4)
     void delete() {
         apartmentDAO.delete(1);
         final List<Apartment> list = apartmentDAO.getAll();
@@ -82,7 +82,7 @@ class AbstractDAOTest {
     }
 
     @Test
-//    @Order(5)
+    @Order(5)
     void getAll() {
         apartmentDAO.insert(ap4);
         apartmentDAO.insert(ap2);
@@ -93,20 +93,20 @@ class AbstractDAOTest {
 
 
     @Test
-//    @Order(6)
+    @Order(6)
     void get() {
         final Apartment apartment = apartmentDAO.get(1).get();
         Assertions.assertEquals(apartment, ap2);
     }
 
     @Test
-//    @Order(7)
+    @Order(7)
     void getByCondition() {
         final List<Apartment> aaDistr = apartmentDAO.getByCondition("district = 'aa'");
         Assertions.assertEquals(aaDistr.get(0), ap2);
         final List<Apartment> area = apartmentDAO.getByCondition("area > 15");
         Assertions.assertEquals(area, List.of(ap1, ap2, ap3));
         final List<Apartment> priceArea = apartmentDAO.getByCondition("price = 11 AND area = 11 ");
-        Assertions.assertEquals(aaDistr.get(0), ap4);
+        Assertions.assertEquals(priceArea.get(0), ap4);
     }
 }

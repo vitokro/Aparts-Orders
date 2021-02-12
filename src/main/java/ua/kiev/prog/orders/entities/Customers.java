@@ -57,12 +57,14 @@ public class Customers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customers customers = (Customers) o;
-        return id == customers.id;
+        return Objects.equals(firstName, customers.firstName) &&
+                Objects.equals(lastName, customers.lastName) &&
+                phone.equals(customers.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(firstName, lastName, phone);
     }
 
     @Override

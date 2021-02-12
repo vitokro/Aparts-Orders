@@ -63,12 +63,15 @@ public class Orders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Orders orders = (Orders) o;
-        return id == orders.id;
+        return customerId == orders.customerId &&
+                goodsId == orders.goodsId &&
+                amount == orders.amount &&
+                Objects.equals(createdAt, orders.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(customerId, goodsId, amount, createdAt);
     }
 
     @Override

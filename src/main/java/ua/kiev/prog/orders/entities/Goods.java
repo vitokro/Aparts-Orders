@@ -57,12 +57,14 @@ public class Goods {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Goods goods = (Goods) o;
-        return id == goods.id;
+        return price == goods.price &&
+                amount == goods.amount &&
+                Objects.equals(name, goods.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name, price, amount);
     }
 
     @Override
