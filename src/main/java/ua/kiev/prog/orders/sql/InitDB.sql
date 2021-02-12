@@ -31,7 +31,7 @@ CREATE TABLE Orders
     customerId INT,
     goodsId    INT,
     amount     INT,
-    createdAt  Date,
+    createdAt  DATE,
     FOREIGN KEY (goodsId) REFERENCES Goods (id),
     FOREIGN KEY (customerId) REFERENCES Customers (id)
 );
